@@ -9,7 +9,7 @@ class ImageService {
 
   Future<String?> uploadImage() async {
     try {
-      final XFile? image = await _picker.pickImage(source: ImageSource.gallery); // Change source: ImageSource.camera for camera
+      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
       if (image == null) return null;
 
       File file = File(image.path);

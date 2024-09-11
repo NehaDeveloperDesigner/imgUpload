@@ -12,8 +12,8 @@ class UserScreen extends StatefulWidget {
 class _UserScreenState extends State<UserScreen> {
   final TextEditingController _nameController = TextEditingController();
   bool _isEditing = false;
-  bool _isUploading = false; // Track upload state
-  String _photoURL = ''; // Store photo URL
+  bool _isUploading = false;
+  String _photoURL = '';
 
   @override
   void initState() {
@@ -30,7 +30,7 @@ class _UserScreenState extends State<UserScreen> {
         await user.updateProfile(displayName: _nameController.text);
         await user.reload();
         setState(() {
-          _isEditing = false; // Hide the input field on success
+          _isEditing = false; // Hide the input
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Display name updated successfully')),
@@ -49,7 +49,7 @@ class _UserScreenState extends State<UserScreen> {
 
     if (pickedFile != null) {
       setState(() {
-        _isUploading = true; // Show loading indicator
+        _isUploading = true;
       });
 
       File file = File(pickedFile.path);
@@ -73,8 +73,8 @@ class _UserScreenState extends State<UserScreen> {
           await user.updatePhotoURL(downloadURL);
           await user.reload();
           setState(() {
-            _photoURL = downloadURL; // Update photo URL
-            _isUploading = false; // Hide loading indicator
+            _photoURL = downloadURL;
+            _isUploading = false;
           });
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Profile picture updated successfully')),
@@ -82,7 +82,7 @@ class _UserScreenState extends State<UserScreen> {
         }
       } catch (e) {
         setState(() {
-          _isUploading = false; // Hide loading indicator
+          _isUploading = false; // Hide loading
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to update profile picture: $e')),
@@ -98,7 +98,7 @@ class _UserScreenState extends State<UserScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('User Screen'),
-        leading: Container(), // Remove the default back arrow
+        leading: Container(),
         actions: [
           IconButton(
             icon: Icon(Icons.logout),
@@ -114,12 +114,12 @@ class _UserScreenState extends State<UserScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 16), // Add space from the top
+            SizedBox(height: 16),
             Stack(
-              clipBehavior: Clip.none, // Allow the icon to overflow the avatar
+              clipBehavior: Clip.none,
               children: [
                 GestureDetector(
-                  onTap: _pickAndUploadImage, // Handle avatar tap
+                  onTap: _pickAndUploadImage,
                   child: CircleAvatar(
                     radius: 50,
                     backgroundImage: _photoURL.isNotEmpty

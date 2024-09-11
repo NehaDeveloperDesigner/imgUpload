@@ -11,17 +11,16 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   final _auth = FirebaseAuth.instance;
   User? _user;
+  bool _obscureText = true;
 
   @override
   void initState() {
     super.initState();
-    // Listen for auth state changes
     _auth.authStateChanges().listen((User? user) {
       setState(() {
-        _user = user; // Store user in state
+        _user = user;
       });
       if (user != null) {
-        // Navigate to home screen if user is logged in
         Navigator.pushReplacementNamed(context, '/main');
       }
     });
@@ -34,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
         password: _passwordController.text,
       );
       _user = userCredential.user;
-      Navigator.pushReplacementNamed(context, '/main'); // Navigate to main screen after login
+      Navigator.pushReplacementNamed(context, '/main'); // Navigate to main
     } catch (e) {
       _showErrorDialog(e.toString());
     }
@@ -94,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 20),
                 TextField(
                   controller: _passwordController,
+                  obscureText: _obscureText,
                   decoration: InputDecoration(
                     labelText: 'Password',
                     border: OutlineInputBorder(
@@ -101,13 +101,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.visibility),
+                      icon: Icon(
+                        _obscureText ? Icons.visibility_off : Icons.visibility,
+                      ),
                       onPressed: () {
-                        // Toggle password visibility
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
                       },
                     ),
                   ),
-                  obscureText: true,
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
@@ -121,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: Text(
                     'Login',
-                    style: TextStyle(fontSize: 16,color: Colors.white),
+                    style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 ),
                 SizedBox(height: 20),

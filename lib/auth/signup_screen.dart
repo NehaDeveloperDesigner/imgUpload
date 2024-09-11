@@ -11,6 +11,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _auth = FirebaseAuth.instance;
+  bool _obscureText = true; // Variable to manage password visibility
 
   void _signup() async {
     try {
@@ -97,6 +98,7 @@ class _SignupScreenState extends State<SignupScreen> {
               SizedBox(height: 20),
               TextField(
                 controller: _passwordController,
+                obscureText: _obscureText, // Use the variable to manage password visibility
                 decoration: InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(
@@ -104,13 +106,16 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   prefixIcon: Icon(Icons.lock),
                   suffixIcon: IconButton(
-                    icon: Icon(Icons.visibility),
+                    icon: Icon(
+                      _obscureText ? Icons.visibility_off : Icons.visibility,
+                    ),
                     onPressed: () {
-                      // Toggle password visibility
+                      setState(() {
+                        _obscureText = !_obscureText; // Toggle the visibility state
+                      });
                     },
                   ),
                 ),
-                obscureText: true,
               ),
               SizedBox(height: 20),
               ElevatedButton(
@@ -124,7 +129,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 child: Text(
                   'Sign Up',
-                  style: TextStyle(fontSize: 16,color: Colors.white),
+                  style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
               SizedBox(height: 20),

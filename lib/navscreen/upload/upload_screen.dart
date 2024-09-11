@@ -110,14 +110,14 @@ class _UploadScreenState extends State<UploadScreen> {
                   return GestureDetector(
                     onTap: () => _showImagePreview(imageUrl),
                     child: Container(
-                      margin: EdgeInsets.all(8.0), // Margin around each image
-                      padding: EdgeInsets.all(4.0), // Padding inside the container
+                      margin: EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(4.0),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10), // Border radius for the image
-                        border: Border.all(color: Colors.blue, width: 1), // Border color and width
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.blue, width: 1),
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10), // Border radius for the image
+                        borderRadius: BorderRadius.circular(10),
                         child: Image.network(imageUrl, fit: BoxFit.cover),
                       ),
                     ),
