@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "549923030977",
+    "project_id": "fire-demo-image",
+    "storage_bucket": "fire-demo-image.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549923030977:android:38ff7d402012a0b1299140",
+        "android_client_info": {
+          "package_name": "com.example.demo_image"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6WC5EUNiEMS_QBhfAEPKMzPREOi26-VE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
